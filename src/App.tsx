@@ -1,12 +1,32 @@
 import React from "react";
-import { Button } from "antd";
-import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import { Firebase, FirebaseContext } from "components/Firebase";
+import { Layout } from "components/Layout";
+import { HomePage } from "pages/home";
+
+import GlobalStyle from "global-styles";
+
+const PublicRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <Button type="primary">ทดสอบ</Button>
-    </div>
+    <FirebaseContext.Provider value={new Firebase()}>
+      <Switch>
+        <PublicRoute exact path="/" component={HomePage} useLayout={true} />
+      </Switch>
+      <GlobalStyle />
+    </FirebaseContext.Provider>
   );
 }
 
