@@ -1,8 +1,1 @@
 @import "~antd/dist/antd.css";
-
-body {
-  margin: 0;
-  font-family: "Sarabun", sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
