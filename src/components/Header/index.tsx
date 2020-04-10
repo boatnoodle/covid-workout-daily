@@ -26,6 +26,7 @@ const SiderStyled = styled(Sider)`
   left: 0;
   top: 50%;
   transform: translate(0%, -50%);
+  z-index: 999;
   & .ant-layout-sider-zero-width-trigger:hover,
   & .ant-layout-sider-zero-width-trigger,
   & .ant-menu.ant-menu-dark,
