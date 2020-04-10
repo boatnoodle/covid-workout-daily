@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useHistory } from "react-router-dom";
 import { Layout, Menu, Typography } from "antd";
 import { FireOutlined, MenuOutlined, SettingOutlined } from "@ant-design/icons";
 
@@ -47,26 +48,50 @@ const SiderStyled = styled(Sider)`
 `;
 
 const Header = () => {
+  const [collapsed, setCollapsed] = useState(true);
+  const history = useHistory();
+
+  const handleRoute = (page) => {
+    switch (page) {
+      case "home":
+        history.push("/");
+        break;
+      case "workout":
+        history.push("/workout");
+        break;
+      case "setting-workout":
+        history.push("/setting-workout");
+        break;
+      default:
+        break;
+    }
+
+    setCollapsed(true);
+  };
+
   return (
     <Wrapper>
-      <Title level={4}>COVID WORKOUT</Title>
+      <div onClick={() => handleRoute("home")}>
+        <Title level={4}>COVID WORKOUT</Title>
+      </div>
       <SiderStyled
         breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
+        collapsedWidth={0}
+        collapsed={collapsed}
+        // onBreakpoint={(broken) => {
+        //   console.log(broken);
+        // }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          setCollapsed(collapsed);
         }}
       >
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1">
+          <Menu.Item key="1" onClick={() => handleRoute("workout")}>
             <FireOutlined />
             <span className="nav-text">ออกกำลังกาย</span>
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="2" onClick={() => handleRoute("setting-workout")}>
             <SettingOutlined />
             <span className="nav-text">ตั้งค่าโปรแกรมของคุณ</span>
           </Menu.Item>

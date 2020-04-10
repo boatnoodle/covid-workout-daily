@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { Firebase, FirebaseContext } from "components/Firebase";
 import { Layout } from "components/Layout";
 import { HomePage } from "pages/home";
+import { SettingWorkoutPage } from "pages/setting-workout";
 
 import GlobalStyle from "global-styles";
 
@@ -24,6 +25,12 @@ function App() {
     <FirebaseContext.Provider value={new Firebase()}>
       <Switch>
         <PublicRoute exact path="/" component={HomePage} useLayout={true} />
+        <PublicRoute
+          exact
+          path="/setting-workout"
+          component={SettingWorkoutPage}
+          useLayout={true}
+        />
       </Switch>
       <GlobalStyle />
     </FirebaseContext.Provider>
