@@ -3,10 +3,16 @@ import styled from "styled-components";
 
 import { useHistory } from "react-router-dom";
 import { Layout, Menu, Typography } from "antd";
-import { FireOutlined, MenuOutlined, SettingOutlined } from "@ant-design/icons";
+import { FireOutlined, SettingOutlined } from "@ant-design/icons";
 
 const { Sider } = Layout;
 const { Title } = Typography;
+
+const HeaderStyled = styled(Title)`
+  &&& {
+    margin-left: 20px;
+  }
+`;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -27,8 +33,7 @@ const Wrapper = styled.div`
 
 const SiderStyled = styled(Sider)`
   position: absolute;
-  top: 60px;
-  right: 36px;
+  top: 63px;
   transform: translate(0%, -50%);
   z-index: 999;
   & .ant-layout-sider-zero-width-trigger:hover,
@@ -37,7 +42,7 @@ const SiderStyled = styled(Sider)`
   .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #8cb909;
     color: black;
-    border-radius: 2px 0px 0px 2px;
+    top: 0px;
   }
 
   & .ant-menu-dark .ant-menu-item-selected,
@@ -83,7 +88,7 @@ const Header = () => {
   return (
     <Wrapper>
       <div onClick={() => handleRoute("home")}>
-        <Title level={4}>COVID WORKOUT</Title>
+        <HeaderStyled level={4}>COVID WORKOUT</HeaderStyled>
       </div>
       <SiderStyled
         breakpoint="lg"

@@ -1,60 +1,31 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 
-import { Formik, Field } from "formik";
-import { Form, Typography, Divider, Steps } from "antd";
-import { ListExercise } from "./components/ListsExercise";
+import { Main } from "./components/Main";
+import { Detail } from "./components/Detail";
 import { getExercise } from "services/firebase";
 
-const { Step } = Steps;
-
-const StepsStyled = styled(Steps)`
-  position: sticky;
-  top: 90px;
-  z-index: 999;
-  background: black;
-  & .ant-steps-item-process .ant-steps-item-icon {
-    background: #8cb90b;
-    border-color: #8cb90b;
-    & span {
-      color: black;
-    }
-  }
-  & .ant-steps-item-wait .ant-steps-item-icon {
-    background: black;
-    border-color: #8cb90b;
-  }
-
-  & .ant-steps-item-icon > .ant-steps-icon {
-    color: #8cb90b;
-  }
-  &&& .ant-steps-item-title {
-    font-size: 0.8rem;
-    color: #8cb90b;
-  }
-`;
+const actionConst = {
+  main: "main",
+  selectExercise: "selectExercise",
+};
 
 export const AddProgram = () => {
-  const [exercies, setExercise] = useState(null);
-  // const initialValues = {};
-
-  // const handleSubmit = () => {};
+  const [action, setAction] = useState(actionConst.selectExercise);
+  const [workoutDetail, setWorkoutDetail] = useState(null);
+  const [exercise, setExsercise] = useState(null);
 
   useEffect(() => {
-    getExercise(setExercise);
+    getExercise(setExsercise);
   }, []);
 
-  console.log(exercies, "xx");
-
-  return (
-    <>
-      <StepsStyled direction="vertical" current={0}>
-        <Step title="เลือกท่าออกกำลังกาย" />
-        <Step title="วางแผนจำนวนเซ็ต" />
-        <Step title="วางแผนเวลา" />
-      </StepsStyled>
-      <Divider />
-      <ListExercise />
-    </>
+  return action === actionConst.main ? (
+    <Main setAction={setAction} action={action} workoutDetail={workoutDetail} />
+  ) : (
+    <Detail
+      datas={exercise}
+      setAction={setAction}
+      action={action}
+      setWorkoutDetail={setWorkoutDetail}
+    />
   );
 };
