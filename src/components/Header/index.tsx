@@ -9,6 +9,10 @@ const { Sider } = Layout;
 const { Title } = Typography;
 
 const Wrapper = styled.div`
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   background: #8cb90b;
@@ -23,8 +27,8 @@ const Wrapper = styled.div`
 
 const SiderStyled = styled(Sider)`
   position: absolute;
-  left: 0;
-  top: 50%;
+  top: 60px;
+  right: 36px;
   transform: translate(0%, -50%);
   z-index: 999;
   & .ant-layout-sider-zero-width-trigger:hover,
@@ -33,6 +37,7 @@ const SiderStyled = styled(Sider)`
   .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #8cb909;
     color: black;
+    border-radius: 2px 0px 0px 2px;
   }
 
   & .ant-menu-dark .ant-menu-item-selected,

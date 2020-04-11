@@ -17,3 +17,19 @@ export const getProgramWorkouts = (setState) => {
       console.log("Error getting documents: ", error);
     });
 };
+
+export const getExercise = (setState) => {
+  firebase.db
+    .collection("exercise")
+    .get()
+    .then(function (querySnapshot) {
+      let datas = [];
+      querySnapshot.forEach(function (doc) {
+        datas = [...datas, doc.data()];
+      });
+      setState(datas);
+    })
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
+};

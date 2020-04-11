@@ -3,15 +3,16 @@ import styled from "styled-components";
 
 import { Formik, Field } from "formik";
 import { Form, Typography, Divider, Steps } from "antd";
-import { InputText, InputPassword } from "components/Input";
+import { ListExercise } from "./components/ListsExercise";
+import { getExercise } from "services/firebase";
 
 const { Step } = Steps;
-const { Title } = Typography;
 
 const StepsStyled = styled(Steps)`
-  /* & .ant-steps-item-container {
-    height: 80px;
-  } */
+  position: sticky;
+  top: 90px;
+  z-index: 999;
+  background: black;
   & .ant-steps-item-process .ant-steps-item-icon {
     background: #8cb90b;
     border-color: #8cb90b;
@@ -34,9 +35,16 @@ const StepsStyled = styled(Steps)`
 `;
 
 export const AddProgram = () => {
-  const initialValues = {};
+  const [exercies, setExercise] = useState(null);
+  // const initialValues = {};
 
-  const handleSubmit = () => {};
+  // const handleSubmit = () => {};
+
+  useEffect(() => {
+    getExercise(setExercise);
+  }, []);
+
+  console.log(exercies, "xx");
 
   return (
     <>
@@ -45,6 +53,8 @@ export const AddProgram = () => {
         <Step title="วางแผนจำนวนเซ็ต" />
         <Step title="วางแผนเวลา" />
       </StepsStyled>
+      <Divider />
+      <ListExercise />
     </>
   );
 };

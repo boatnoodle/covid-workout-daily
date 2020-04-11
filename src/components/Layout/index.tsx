@@ -6,7 +6,7 @@ import Footer from "../Footer";
 const Container = styled.div`
   max-width: calc(1280px + 16px * 2);
   /* max-width: calc(768px + 16px * 2); */
-  margin: 1rem auto;
+  margin-top: 4rem;
   display: flex;
   min-height: 100%;
   padding: 0 16px;
