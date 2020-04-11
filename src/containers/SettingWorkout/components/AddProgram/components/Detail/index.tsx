@@ -6,6 +6,7 @@ import { PrimaryButton } from "components/Button";
 import { RightOutlined } from "@ant-design/icons";
 import { SelectExercise } from "./SelectExercise";
 import { AmountExercise } from "./AmountExercise";
+import { TimeExercise } from "./TimeExercise";
 
 const { Step } = Steps;
 const { Title } = Typography;
@@ -57,8 +58,13 @@ const StepsStyled = styled(Steps)`
 `;
 
 export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
-  const [step, setStep] = useState(0);
-  const [detail, setDetail] = useState({});
+  const [step, setStep] = useState(2);
+  const [detail, setDetail] = useState({
+    name: null,
+    amount: null,
+    enableTime: false,
+    timeObj: null,
+  });
 
   console.log(detail, "detail");
 
@@ -74,6 +80,15 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
     setDetail({ ...detail, amount: value });
   };
 
+  const handleTimeExercise = (obj) => {
+    console.log(obj, "obj select");
+    setDetail({
+      ...detail,
+      enableTime: obj?.enableTime,
+      timeObj: obj?.timeObj,
+    });
+  };
+
   const stepDisplayHeader = () => {
     switch (step) {
       case 0:
@@ -81,7 +96,7 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
       case 1:
         return <Title level={4}>วางแผนจำนวนเซ็ต</Title>;
       case 2:
-        return <Title level={4}></Title>;
+        return <Title level={4}>วางแผนเวลา</Title>;
       default:
         break;
     }
@@ -101,7 +116,7 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
       case 1:
         return <AmountExercise handleAmountExercise={handleAmountExercise} />;
       case 2:
-        return <div>another step</div>;
+        return <TimeExercise handleTimeExercise={handleTimeExercise} />;
       default:
         break;
     }
@@ -135,8 +150,8 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
           <Step title="วางแผนเวลา" />
         </StepsStyled>
         <WrapperButton>{nextStepButton()}</WrapperButton>
+        <Divider />
       </WrapperSticky>
-      <Divider />
       {stepDisplayHeader()}
       {stepDisplayContent()}
     </>

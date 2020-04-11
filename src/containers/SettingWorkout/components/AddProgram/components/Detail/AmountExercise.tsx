@@ -1,20 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { List, Typography } from "antd";
-import { Form as FormAnt, Select } from "antd";
+import { Typography } from "antd";
+import { Form as FormAnt } from "antd";
+import { PrimarySelect } from "components/Select";
 
-const { Option } = Select;
-const { Title } = Typography;
-
-const SelectStyled = styled(Select)`
-  width: 100%;
-  &.ant-select-single .ant-select-selector {
-    height: 40px;
-    font-size: 1rem;
-    background: #8cb909;
-    border-color: #8cb909;
-  }
-`;
+const { Option } = PrimarySelect;
 
 interface Item {
   name: string;
@@ -26,13 +15,13 @@ export const AmountExercise = ({ handleAmountExercise }) => {
   return (
     <FormAnt>
       <FormAnt.Item label="ระบุจำนวนเซ็ต">
-        <SelectStyled onChange={handleAmountExercise}>
+        <PrimarySelect onChange={handleAmountExercise}>
           {[...Array(20).keys()].map((i, index) => (
             <Option value={i + 1} key={index}>
               {i + 1}
             </Option>
           ))}
-        </SelectStyled>
+        </PrimarySelect>
       </FormAnt.Item>
     </FormAnt>
   );
