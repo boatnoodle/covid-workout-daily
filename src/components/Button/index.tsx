@@ -5,9 +5,9 @@ import { Button } from "antd";
 
 export const PrimaryButton = styled(Button)`
   && {
-    background: black;
-    border-color: black;
-    color: yellow;
+    background: #8cb909;
+    border-color: #8cb909;
+    color: black;
     padding: 0 1rem;
     height: 40px;
     border-radius: 5px;

@@ -11,13 +11,13 @@ const { Title } = Typography;
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  background: black;
+  background: #8cb90b;
   padding: 1rem;
 
   & h4.ant-typography,
   .ant-typography h4 {
-    color: yellow;
     margin: 0;
+    color: black;
   }
 `;
 
@@ -31,20 +31,25 @@ const SiderStyled = styled(Sider)`
   & .ant-layout-sider-zero-width-trigger,
   & .ant-menu.ant-menu-dark,
   .ant-menu.ant-menu-dark .ant-menu-sub {
-    background: black;
-    color: yellow;
+    background: #8cb909;
+    color: black;
   }
 
   & .ant-menu-dark .ant-menu-item-selected,
   & .anticon svg,
   & .ant-menu-item .anticon + span,
   .ant-menu-submenu-title .anticon + span {
-    color: yellow;
+    color: black;
+    & span,
+    svg {
+      color: #8cb909;
+    }
   }
 
   & .ant-menu.ant-menu-dark .ant-menu-item-selected,
   .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-    background-color: #163a5f;
+    background-color: black;
+    color: #8cb909;
   }
 `;
 

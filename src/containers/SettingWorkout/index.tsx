@@ -22,7 +22,7 @@ const modePage = {
 
 export const SettingWorkout = () => {
   const [programs, setProgram] = useState(null);
-  const [mode, setMode] = useState(null);
+  const [mode, setMode] = useState(modePage.add);
   const firebase = useFirebase();
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export const SettingWorkout = () => {
       <Wrapper>
         <Title level={4}>ยังไม่มีโปรแกรมการออกกำลังกาย</Title>
         <PrimaryButton onClick={() => handleMode(modePage.add)}>
-          เพิ่มโปรแกรม
+          สร้างโปรแกรมออกกำลังกาย
         </PrimaryButton>
       </Wrapper>
     );
