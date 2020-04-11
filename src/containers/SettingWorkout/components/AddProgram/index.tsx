@@ -19,12 +19,16 @@ export const AddProgram = () => {
   }, []);
 
   return action === actionConst.main ? (
-    <Main setAction={setAction} action={action} workoutDetail={workoutDetail} />
+    <Main
+      setAction={setAction}
+      action={actionConst}
+      workoutDetail={workoutDetail}
+    />
   ) : (
     <Detail
       datas={exercise}
       setAction={setAction}
-      action={action}
+      action={actionConst}
       setWorkoutDetail={setWorkoutDetail}
     />
   );

@@ -58,15 +58,13 @@ const StepsStyled = styled(Steps)`
 `;
 
 export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [detail, setDetail] = useState({
     name: null,
     amount: null,
     enableTime: false,
     timeObj: null,
   });
-
-  console.log(detail, "detail");
 
   const handleChange = (current) => {
     setStep(current);
@@ -81,7 +79,6 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
   };
 
   const handleTimeExercise = (obj) => {
-    console.log(obj, "obj select");
     setDetail({
       ...detail,
       enableTime: obj?.enableTime,
@@ -123,7 +120,7 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
   };
 
   const nextStepButton = () => {
-    if (step !== 3) {
+    if (step <= 2) {
       const nextStep = step + 1;
       return (
         <PrimaryButton
@@ -134,6 +131,11 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
           ต่อไป
         </PrimaryButton>
       );
+    }
+
+    if (step === 3) {
+      setWorkoutDetail(detail);
+      setAction(action.main);
     }
   };
 
