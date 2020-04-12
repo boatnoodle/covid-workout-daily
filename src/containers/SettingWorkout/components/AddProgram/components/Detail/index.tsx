@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { useFormikContext } from "formik";
 import { Typography, Divider, Steps } from "antd";
 import { PrimaryButton } from "components/Button";
 import { RightOutlined } from "@ant-design/icons";
@@ -57,7 +58,8 @@ const StepsStyled = styled(Steps)`
   }
 `;
 
-export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
+export const Detail = ({ datas, setAction, action }) => {
+  const { values, setFieldValue } = useFormikContext<any>();
   const [step, setStep] = useState(0);
   const [detail, setDetail] = useState({
     name: null,
@@ -134,9 +136,13 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
     }
 
     if (step === 3) {
-      setWorkoutDetail(detail);
+      addWorkoutDetail();
       setAction(action.main);
     }
+  };
+
+  const addWorkoutDetail = () => {
+    setFieldValue("programDetail", [...values.programDetail, detail]);
   };
 
   useEffect(() => {

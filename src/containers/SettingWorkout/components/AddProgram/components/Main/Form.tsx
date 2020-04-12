@@ -12,7 +12,7 @@ export const Form = () => {
         {({ field }) => {
           return (
             <FormAnt.Item label="ชื่อโปรแกรม">
-              <InputText {...field} />
+              <InputText {...field} placeholder="ระบุชื่อโปรแกรมของคุณ" />
             </FormAnt.Item>
           );
         }}
