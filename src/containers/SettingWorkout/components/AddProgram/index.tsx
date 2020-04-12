@@ -34,51 +34,6 @@ export const AddProgram = () => {
           restTime: null,
         },
       },
-      {
-        name: "Dumbbell curl",
-        amount: 4,
-        enableTime: false,
-        timeObj: {
-          activeTime: null,
-          restTime: null,
-        },
-      },
-      {
-        name: "Dumbbell curl",
-        amount: 4,
-        enableTime: false,
-        timeObj: {
-          activeTime: null,
-          restTime: null,
-        },
-      },
-      {
-        name: "Dumbbell curl",
-        amount: 4,
-        enableTime: false,
-        timeObj: {
-          activeTime: null,
-          restTime: null,
-        },
-      },
-      {
-        name: "Dumbbell curl",
-        amount: 4,
-        enableTime: false,
-        timeObj: {
-          activeTime: null,
-          restTime: null,
-        },
-      },
-      {
-        name: "Dumbbell curl",
-        amount: 4,
-        enableTime: false,
-        timeObj: {
-          activeTime: null,
-          restTime: null,
-        },
-      },
     ],
   };
 
