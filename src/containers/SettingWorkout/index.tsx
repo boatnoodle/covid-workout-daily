@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { Typography } from "antd";
-import { getProgramWorkouts } from "services/firebase";
-import { useFirebase } from "components/Firebase/useFirebase";
+import { Typography, Divider, Spin } from "antd";
+import { getProgramWorkout } from "services/firebase";
 import { PrimaryButton } from "components/Button";
 import { ListProgram } from "./components/ListProgram";
 import { AddProgram } from "./components/AddProgram";
@@ -22,24 +21,15 @@ const modePage = {
 
 export const SettingWorkout = () => {
   const [programs, setProgram] = useState(null);
-  const [mode, setMode] = useState(modePage.add);
-  const firebase = useFirebase();
+  const [mode, setMode] = useState(modePage.list);
 
   useEffect(() => {
-    getProgramWorkouts(setProgram);
-  }, []);
+    getProgramWorkout(setProgram);
+  }, [mode]);
 
-  const addData = (payload) => {
-    firebase.db
-      .collection("programWorkouts")
-      .add(payload)
-      .then(function () {
-        console.log("Add success");
-      })
-      .catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
-  };
+  useEffect(() => {
+    getProgramWorkout(setProgram);
+  }, []);
 
   const handleMode = (mode) => {
     switch (mode) {
@@ -49,7 +39,6 @@ export const SettingWorkout = () => {
       case modePage.add:
         setMode(modePage.add);
         break;
-
       default:
         break;
     }
@@ -65,12 +54,16 @@ export const SettingWorkout = () => {
       </Wrapper>
     );
   } else if (mode === modePage.add) {
-    return <AddProgram />;
+    return <AddProgram setMode={setMode} modePage={modePage} />;
   }
   return (
-    <div>
-      Setting Workout
-      <ListProgram datas={programs} />
-    </div>
+    <Wrapper>
+      <PrimaryButton onClick={() => handleMode(modePage.add)}>
+        สร้างโปรแกรมออกกำลังกาย
+      </PrimaryButton>
+      <Divider />
+      <Title level={3}>โปรแกรมของคุณ</Title>
+      {programs ? <ListProgram datas={programs} /> : <Spin size="large" />}
+    </Wrapper>
   );
 };

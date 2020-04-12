@@ -17,7 +17,7 @@ interface ProgramDetail {
   };
 }
 
-export const Main = ({ setAction, action }) => {
+export const Main = ({ setAction, action, handleSubmit }) => {
   const { values } = useFormikContext<any>();
 
   return (
@@ -36,7 +36,7 @@ export const Main = ({ setAction, action }) => {
       <PrimaryButton
         disabled={!values.programName || values.programDetail.length === 0}
         style={{ marginBottom: "20px" }}
-        onClick={() => setAction(action.selectExercise)}
+        onClick={handleSubmit}
         icon={<SaveOutlined />}
       >
         บันทึกโปรแกรม

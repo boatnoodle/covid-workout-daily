@@ -3,15 +3,17 @@ import { Firebase } from "components/Firebase/firebase";
 
 const firebase = new Firebase() as any;
 
-export const getProgramWorkouts = (setState) => {
+export const getProgramWorkout = (setState) => {
   firebase.db
-    .collection("programWorkouts")
+    .collection("programWorkout")
     .orderBy("created", "desc")
     .get()
     .then(function (querySnapshot) {
+      let datas = [];
       querySnapshot.forEach(function (doc) {
-        setState(doc.data());
+        datas = [...datas, doc.data()];
       });
+      setState(datas);
     })
     .catch(function (error) {
       console.log("Error getting documents: ", error);

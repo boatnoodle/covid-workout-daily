@@ -16,7 +16,7 @@ const HeaderStyled = styled(Title)`
 
 const Wrapper = styled.div`
   position: fixed;
-  z-index: 9999;
+  z-index: 10;
   top: 0;
   width: 100%;
   display: grid;

@@ -39,12 +39,13 @@ interface ProgramDetail {
   amount: number;
   enableTime: boolean;
   timeObj: {
-    activeTime: number | null;
+    actionTime: number | null;
     restTime: number | null;
   };
 }
 
 export const ListProgramDetail = ({ programDetail }) => {
+  console.log(programDetail, "programDetail");
   const { setFieldValue, values } = useFormikContext<any>();
 
   const handleDelete = (indexDelete) => {
@@ -69,7 +70,7 @@ export const ListProgramDetail = ({ programDetail }) => {
               {" เซต"}
               {item.enableTime && (
                 <div>
-                  {`เล่น ${item.timeObj.activeTime || "ไม่ระบุ"} นาที / พัก ${
+                  {`เล่น ${item.timeObj.actionTime || "ไม่ระบุ"} นาที / พัก ${
                     item.timeObj.restTime || "ไม่ระบุ"
                   } นาที`}
                 </div>
