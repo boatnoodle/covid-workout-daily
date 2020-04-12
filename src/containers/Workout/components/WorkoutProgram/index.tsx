@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Progress, Button } from "antd";
@@ -34,16 +34,47 @@ const ButtonStop = styled(Button)`
 `;
 
 export const WorkoutProgram = () => {
+  const [percent, setPercent] = useState(0);
+  const timer = (seconds, cb, counter = 0) => {
+    const counterTime = counter;
+    const remaningTime = seconds;
+    window.setTimeout(function () {
+      cb();
+      calProgress(counterTime);
+      if (remaningTime > 0) {
+        timer(remaningTime - 1, cb, counterTime + 1);
+      }
+    }, 1000);
+  };
+
+  const callback = () => {
+    // console.log("time change");
+  };
+
+  const calProgress = (sec) => {
+    const percent = Math.round((sec * 100) / 60);
+    setPercent(percent);
+  };
+
+  const calSecond = (percent) => {
+    const second = Math.round((percent * 60) / 100);
+    return second;
+  };
+
+  const handleStart = () => {
+    timer(60, callback);
+  };
+
   return (
     <Wrapper>
       <DetailWorkout>ท่า .... เซตที่ 1/4</DetailWorkout>
       <ProgressStyled
         width={280}
         type="circle"
-        percent={75}
-        format={(percent) => `${percent} วิ`}
+        percent={percent}
+        format={(percent) => `${calSecond(percent)} วิ`}
       />
-      <ButtonStart>เริ่ม</ButtonStart>
+      <ButtonStart onClick={handleStart}>เริ่ม</ButtonStart>
       <ButtonStop>หยุด</ButtonStop>
     </Wrapper>
   );
