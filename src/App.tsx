@@ -4,6 +4,7 @@ import { Firebase, FirebaseContext } from "components/Firebase";
 import { Layout } from "components/Layout";
 import { HomePage } from "pages/home";
 import { SettingWorkoutPage } from "pages/setting-workout";
+import { WorkoutPage } from "pages/workout";
 
 import GlobalStyle from "global-styles";
 
@@ -29,6 +30,12 @@ function App() {
           exact
           path="/setting-workout"
           component={SettingWorkoutPage}
+          useLayout={true}
+        />
+        <PublicRoute
+          exact
+          path="/workout"
+          component={WorkoutPage}
           useLayout={true}
         />
       </Switch>

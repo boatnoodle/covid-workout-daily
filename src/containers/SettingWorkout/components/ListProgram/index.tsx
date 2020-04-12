@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Collapse, Divider } from "antd";
@@ -27,7 +27,6 @@ const TimeText = styled.div`
 `;
 
 export const ListProgram = ({ datas }) => {
-  console.log(datas, "datas");
   return (
     <Collapse
       bordered={false}
