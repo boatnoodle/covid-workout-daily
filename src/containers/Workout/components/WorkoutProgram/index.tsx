@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 import { Progress, Button } from "antd";
 
@@ -33,26 +34,47 @@ const ButtonStop = styled(Button)`
   grid-area: btnStop;
 `;
 
+function useInterval(callback, delay) {
+  const savedCallback = useRef() as any;
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
 export const WorkoutProgram = () => {
+  const router = useHistory();
+  const [delay, setDelay] = useState(1000);
+  const [isRunning, setIsRunning] = useState(false);
   const [percent, setPercent] = useState(0);
-  const timer = (seconds, cb, counter = 0) => {
-    const counterTime = counter;
-    const remaningTime = seconds;
-    window.setTimeout(function () {
-      cb();
-      calProgress(counterTime);
-      if (remaningTime > 0) {
-        timer(remaningTime - 1, cb, counterTime + 1);
+  const [counter, setCounter] = useState(1);
+
+  useInterval(
+    () => {
+      if (counter <= 60) {
+        calProgress();
+      } else {
+        setIsRunning(false);
       }
-    }, 1000);
-  };
+    },
+    isRunning ? delay : null
+  );
 
-  const callback = () => {
-    // console.log("time change");
-  };
-
-  const calProgress = (sec) => {
-    const percent = Math.round((sec * 100) / 60);
+  const calProgress = () => {
+    const percent = Math.round((counter * 100) / 60);
+    setCounter(counter + 1);
     setPercent(percent);
   };
 
@@ -62,8 +84,14 @@ export const WorkoutProgram = () => {
   };
 
   const handleStart = () => {
-    timer(60, callback);
+    setIsRunning(true);
   };
+
+  const handleStop = () => {
+    setIsRunning(false);
+  };
+
+  console.log(counter);
 
   return (
     <Wrapper>
@@ -75,7 +103,7 @@ export const WorkoutProgram = () => {
         format={(percent) => `${calSecond(percent)} วิ`}
       />
       <ButtonStart onClick={handleStart}>เริ่ม</ButtonStart>
-      <ButtonStop>หยุด</ButtonStop>
+      <ButtonStop onClick={handleStop}>หยุด</ButtonStop>
     </Wrapper>
   );
 };
