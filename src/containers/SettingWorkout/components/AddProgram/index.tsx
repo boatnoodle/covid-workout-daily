@@ -15,16 +15,71 @@ export const AddProgram = () => {
   const [exercise, setExsercise] = useState(null);
   const initialState = {
     programName: null,
-    detail: {
-      workoutName: null,
-      amountSet: null,
-      enableTime: false,
-      timeObj: {
-        activeTime: null,
-        restTime: null,
+    programDetail: [
+      {
+        name: "Barbell bench press",
+        amount: 4,
+        enableTime: true,
+        timeObj: {
+          activeTime: 1,
+          restTime: 1,
+        },
       },
-    },
-    programDetail: [],
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+      {
+        name: "Dumbbell curl",
+        amount: 4,
+        enableTime: false,
+        timeObj: {
+          activeTime: null,
+          restTime: null,
+        },
+      },
+    ],
   };
 
   const handleSubmit = () => {};
