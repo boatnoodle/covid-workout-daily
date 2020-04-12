@@ -10,7 +10,7 @@ const actionConst = {
 };
 
 export const AddProgram = () => {
-  const [action, setAction] = useState(actionConst.selectExercise);
+  const [action, setAction] = useState(actionConst.main);
   const [workoutDetail, setWorkoutDetail] = useState(null);
   const [exercise, setExsercise] = useState(null);
 

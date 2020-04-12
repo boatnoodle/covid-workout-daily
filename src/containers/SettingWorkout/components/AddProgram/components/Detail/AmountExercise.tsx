@@ -15,7 +15,10 @@ export const AmountExercise = ({ handleAmountExercise }) => {
   return (
     <FormAnt>
       <FormAnt.Item label="ระบุจำนวนเซ็ต">
-        <PrimarySelect onChange={handleAmountExercise}>
+        <PrimarySelect
+          onChange={handleAmountExercise}
+          placeholder="ระบุจำนวนเซ็ต"
+        >
           {[...Array(20).keys()].map((i, index) => (
             <Option value={i + 1} key={index}>
               {i + 1}

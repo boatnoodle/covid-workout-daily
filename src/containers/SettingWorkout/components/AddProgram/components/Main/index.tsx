@@ -38,6 +38,7 @@ const StepsStyled = styled(Steps)`
 `;
 
 export const Main = ({ setAction, action, workoutDetail }) => {
+  // console.log(workoutDetail, "xxx");
   const [exercies, setExercise] = useState(null);
   const initialState = {
     programName: null,

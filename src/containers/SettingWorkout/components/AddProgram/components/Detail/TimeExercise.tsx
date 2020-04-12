@@ -84,6 +84,7 @@ export const TimeExercise = ({ handleTimeExercise }) => {
             <SelectStyled
               onChange={(value) => handleTime(timeAction.actionTime, value)}
               suffixIcon={"นาที"}
+              placeholder="เลือกเวลาในการเล่น"
             >
               <Option value={null}>ไม่ระบุเวลา</Option>
               {[...Array(20).keys()].map((i, index) => (
@@ -97,6 +98,7 @@ export const TimeExercise = ({ handleTimeExercise }) => {
             <SelectStyled
               onChange={(value) => handleTime(timeAction.restTime, value)}
               suffixIcon={"นาที"}
+              placeholder="เลือกเวลาในการพักเซต"
             >
               <Option value="">ไม่ระบุเวลา</Option>
               {[...Array(20).keys()].map((i, index) => (

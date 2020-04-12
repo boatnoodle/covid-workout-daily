@@ -139,6 +139,10 @@ export const Detail = ({ datas, setAction, action, setWorkoutDetail }) => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   return (
     <>
       <WrapperSticky>
