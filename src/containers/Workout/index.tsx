@@ -28,11 +28,17 @@ export const Workout = () => {
           <SelectProgram datas={programWorkout} setProgram={setProgram} />
         );
       case actionConst.workout:
-        return <WorkoutProgram />;
+        return <WorkoutProgram program={program} />;
       default:
         break;
     }
   };
+
+  useEffect(() => {
+    if (programWorkout) {
+      setProgram(programWorkout[2]);
+    }
+  }, [programWorkout]);
 
   useEffect(() => {
     if (program) {

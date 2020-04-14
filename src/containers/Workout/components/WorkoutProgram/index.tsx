@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
 
+import { useHistory } from "react-router";
 import { Progress, Button } from "antd";
 
 const Wrapper = styled.div`
@@ -54,26 +54,76 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export const WorkoutProgram = () => {
+export const WorkoutProgram = ({ program }) => {
   const router = useHistory();
   const [delay, setDelay] = useState(1000);
   const [isRunning, setIsRunning] = useState(false);
   const [percent, setPercent] = useState(0);
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(0);
+  const [workoutPlaying, setWorkoutPlaying] = useState(null);
+  const [indexWorkoutPlaying, setIndexWorkoutPlaying] = useState(0);
+  const [amountWorkoutPlaying, setAmountWorkoutPlaying] = useState(0);
+
+  const toSec = (min) => min * 60;
+
+  const activeTime = toSec(workoutPlaying?.timeObj?.activeTime);
+  const restTime = toSec(workoutPlaying?.timeObj?.restTime);
+  const programDetail = program?.programDetail;
 
   useInterval(
     () => {
-      if (counter <= 60) {
-        calProgress();
+      if (activeTime && counter <= activeTime) {
+        calProgress(activeTime);
+        console.log("activetime =>", counter);
+      } else if (restTime && counter <= restTime) {
+        calProgress(restTime);
+        console.log("resttime =>", counter);
       } else {
-        setIsRunning(false);
+        if (activeTime && activeTime === counter) {
+          setWorkoutPlaying({
+            ...workoutPlaying,
+            timeObj: { ...workoutPlaying.timeObj, activeTime: null },
+          });
+          setCounter(0);
+          console.log("end active time =>", counter);
+        } else if (restTime && restTime === counter) {
+          setWorkoutPlaying({
+            ...workoutPlaying,
+            timeObj: { ...workoutPlaying.timeObj, restTime: null },
+          });
+          setCounter(0);
+          console.log("end rest time =>", counter);
+        } else {
+          if (workoutPlaying.amount !== amountWorkoutPlaying) {
+            setWorkoutPlaying({
+              ...workoutPlaying,
+              timeObj: {
+                activeTime:
+                  programDetail?.[indexWorkoutPlaying]?.timeObj?.activeTime,
+                restTime:
+                  programDetail?.[indexWorkoutPlaying]?.timeObj?.restTime,
+              },
+            });
+            setAmountWorkoutPlaying(amountWorkoutPlaying + 1);
+            setCounter(0);
+            console.log("now set is =>", amountWorkoutPlaying + 1);
+          } else if (programDetail?.[indexWorkoutPlaying + 1]) {
+            setCounter(0);
+            setWorkoutPlaying(programDetail?.[indexWorkoutPlaying + 1]);
+            setIndexWorkoutPlaying(indexWorkoutPlaying + 1);
+            console.log("next workout =>", counter);
+          } else {
+            setIsRunning(false);
+            console.log("finish workout =>", counter);
+          }
+        }
       }
     },
-    isRunning ? delay : null
+    isRunning && workoutPlaying ? delay : null
   );
 
-  const calProgress = () => {
-    const percent = Math.round((counter * 100) / 60);
+  const calProgress = (sec) => {
+    const percent = Math.round((counter * 100) / sec);
     setCounter(counter + 1);
     setPercent(percent);
   };
@@ -85,13 +135,14 @@ export const WorkoutProgram = () => {
 
   const handleStart = () => {
     setIsRunning(true);
+    setWorkoutPlaying(programDetail?.[indexWorkoutPlaying]);
   };
 
   const handleStop = () => {
     setIsRunning(false);
   };
 
-  console.log(counter);
+  // console.log(program);
 
   return (
     <Wrapper>
