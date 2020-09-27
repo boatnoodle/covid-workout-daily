@@ -9,7 +9,7 @@ export const PrimaryButton = styled(Button)`
   .ant-btn:focus {
     background: #ff6700;
     border-color: #ff6700;
-    color: black;
+    color: #ffffff;
     padding: 0 1rem;
     height: 40px;
     border-radius: 5px;

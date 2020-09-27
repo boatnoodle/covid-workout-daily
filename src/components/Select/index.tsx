@@ -8,7 +8,8 @@ export const PrimarySelect = styled(Select)`
   &.ant-select-single .ant-select-selector {
     height: 40px;
     font-size: 1rem;
-    background: #ff6700;
-    border-color: #ff6700;
+    background: #ffffff;
+    /* border-color: #ff6700; */
+    border-radius: 8px;
   }
 `;

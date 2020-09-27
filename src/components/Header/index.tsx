@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import firebase from "utils/firebase";
 
 import { useHistory } from "react-router-dom";
-import { Layout, Menu, Typography } from "antd";
-import { FireOutlined, SettingOutlined } from "@ant-design/icons";
-import firebase from "utils/firebase";
+import { Avatar, Col, Dropdown, Layout, Menu, Row, Typography } from "antd";
+import {
+  FireOutlined,
+  SettingOutlined,
+  CaretDownOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
+import { useSession } from "hooks/auth/useSession";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -64,7 +70,18 @@ const SiderStyled = styled(Sider)`
   }
 `;
 
+const StyledMainDropdown = styled(Dropdown)`
+  font-size: 1rem;
+  color: #ffffff;
+`;
+
+const StyledDropdown = styled(Dropdown)`
+  font-size: 0.5rem;
+  color: #ffffff;
+`;
+
 const Header = () => {
+  const { user } = useSession();
   const [collapsed, setCollapsed] = useState(true);
   const history = useHistory();
 
@@ -85,38 +102,63 @@ const Header = () => {
     setCollapsed(true);
   };
 
+  const menuUser = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href="">ข้อมูลส่วนตัว</a>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="1">
+        <a href="" onClick={() => firebase.auth().signOut()}>
+          ออกจากระบบ
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a onClick={() => history.push("/setting-workout")}>
+          ตั้งค่าโปรแกรมของคุณ
+        </a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a onClick={() => history.push("/workout")}>ออกกำลังกาย</a>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <Wrapper>
-      <div onClick={() => handleRoute("home")}>
-        <HeaderStyled level={4}>FIT FOR FRIENDS</HeaderStyled>
-      </div>
-      <SiderStyled
-        breakpoint="lg"
-        collapsedWidth={0}
-        collapsed={collapsed}
-        // onBreakpoint={(broken) => {
-        //   console.log(broken);
-        // }}
-        onCollapse={(collapsed, type) => {
-          setCollapsed(collapsed);
-        }}
-      >
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" onClick={() => handleRoute("workout")}>
-            <FireOutlined />
-            <span className="nav-text">ออกกำลังกาย</span>
-          </Menu.Item>
-          <Menu.Item key="2" onClick={() => handleRoute("setting-workout")}>
-            <SettingOutlined />
-            <span className="nav-text">ตั้งค่าโปรแกรมของคุณ</span>
-          </Menu.Item>
-          <Menu.Item key="3" onClick={() => handleRoute("sign-out")}>
-            <SettingOutlined />
-            <span className="nav-text">ออกจากระบบ</span>
-          </Menu.Item>
-        </Menu>
-      </SiderStyled>
+      <Row align="middle">
+        <Col>
+          <StyledMainDropdown overlay={menu} trigger={["click"]}>
+            <div
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <UnorderedListOutlined />
+            </div>
+          </StyledMainDropdown>
+        </Col>
+        <Col flex="auto">
+          <a onClick={() => history.push("/")}>
+            <HeaderStyled level={4}>FIT FOR FRIENDS</HeaderStyled>
+          </a>
+        </Col>
+        <Col>
+          <StyledDropdown overlay={menuUser} trigger={["click"]}>
+            <div
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <Avatar size="default" src={user?.photoURL} />
+              <CaretDownOutlined />
+            </div>
+          </StyledDropdown>
+        </Col>
+      </Row>
     </Wrapper>
   );
 };

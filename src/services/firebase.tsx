@@ -48,21 +48,39 @@ export const signIn = async (user: UserFromProvider) => {
   }
 };
 
-// return firebase
-//     .firestore()
-//     .collection("users")
-//     .doc(user.uid)
-//     .get()
-//     .then((data) => console.log(data.data(), "data"))
-//     .catch((err) => {
-//       console.log("Error getting documents: ", JSON.stringify(err));
-//     });
+export const addProgram = async (payload) => {
+  const createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
-export const getProgramWorkout = (setState) => {
+  try {
+    const response = await firebase
+      .firestore()
+      .collection("programs")
+      .add({ ...payload, createdAt });
+
+    return response;
+  } catch (error) {
+    console.log("Error getting documents: ", JSON.stringify(error));
+  }
+};
+
+export const getProgram = async () => {
+  try {
+    const response = await firebase
+      .firestore()
+      .collection("programs")
+      .orderBy("created", "desc")
+      .get();
+
+    return response;
+  } catch (error) {
+    console.log("Error getting documents: ", JSON.stringify(error));
+  }
+};
+
+export const getPrograms = async (setState) => {
   firebase
     .firestore()
-    .collection("programWorkout")
-    .orderBy("created", "desc")
+    .collection("programs")
     .get()
     .then(function (querySnapshot) {
       let datas = [];
@@ -71,15 +89,15 @@ export const getProgramWorkout = (setState) => {
       });
       setState(datas);
     })
-    .catch(function (error) {
-      console.log("Error getting documents: ", error);
+    .catch((error) => {
+      console.log("Error getting documents: ", JSON.stringify(error));
     });
 };
 
-export const getExercise = (setState) => {
+export const getExercises = (setState) => {
   firebase
     .firestore()
-    .collection("exercise")
+    .collection("exercises")
     .get()
     .then(function (querySnapshot) {
       let datas = [];

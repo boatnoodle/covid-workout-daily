@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase";
 
 import { Formik } from "formik";
 import { Main } from "./components/Main";
 import { Detail } from "./components/Detail";
-// import { getExercise } from "services/firebase";
 import { message } from "antd";
+import { getExercises, addProgram } from "services/firebase";
+import { useSession } from "hooks/auth/useSession";
 
 const actionConst = {
   main: "main",
@@ -13,22 +13,21 @@ const actionConst = {
 };
 
 export const AddProgram = ({ setMode, modePage }) => {
-  // const firebaseAuth = useFirebase();
+  const { user } = useSession();
   const [action, setAction] = useState(actionConst.main);
-  const [exercise, setExsercise] = useState(null);
+  const [exercises, setExsercises] = useState(null);
   const initialState = {
+    user,
     programName: null,
     programDetail: [
       // {
+      //   day: "จันทร์",
       //   name: "Barbell bench press",
       //   amount: 4,
-      //   enableTime: true,
-      //   timeObj: {
-      //     activeTime: 1,
-      //     restTime: 1,
-      //   },
+      //   enableTime: false,
       // },
       // {
+      // day: "อังคาร",
       //   name: "Dumbbell curl",
       //   amount: 4,
       //   enableTime: false,
@@ -40,26 +39,15 @@ export const AddProgram = ({ setMode, modePage }) => {
     ],
   };
 
-  const handleSubmit = (values) => {
-    const payload = {
-      ...values,
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-    };
-
-    // firebaseAuth.db
-    //   .collection("programWorkout")
-    //   .add(payload)
-    //   .then(function () {
-    //     message.success("บันทึกโปรแกรมสำเร็จ");
-    //     setMode(modePage.list);
-    //   })
-    //   .catch(function (error) {
-    //     console.error("Error writing document: ", error);
-    //   });
+  const handleSubmit = async (values) => {
+    await addProgram(values);
+    message.success("บันทึกโปรแกรมสำเร็จ");
+    setMode(modePage.list);
   };
 
   useEffect(() => {
-    // getExercise(setExsercise);
+    console.log("call");
+    getExercises(setExsercises);
   }, []);
 
   return (
@@ -75,7 +63,7 @@ export const AddProgram = ({ setMode, modePage }) => {
               />
             ) : (
               <Detail
-                datas={exercise}
+                datas={exercises}
                 setAction={setAction}
                 action={actionConst}
               />

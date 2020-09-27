@@ -5,21 +5,14 @@ import { Input } from "antd";
 
 export const InputText = styled(Input)`
   && {
-    border-radius: 0;
-    border: none;
-    background: #ff6700;
+    border-radius: 8px;
     font-size: 0.8rem;
   }
 `;
 
 export const InputPassword = styled(Input.Password)`
   && {
-    border-radius: 5px;
-    border: none;
-    background: #ff6700;
+    border-radius: 8px;
     font-size: 0.8rem;
-  }
-  & .ant-input {
-    background: #ff6700;
   }
 `;

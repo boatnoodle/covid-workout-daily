@@ -100,7 +100,6 @@ function useProvideSession() {
 // If there are extra fields you want from the original user
 // object then you'd add those here.
 const formatUser = (user: firebase.User): UserFromProvider => {
-  console.log(user, " user");
   return {
     uid: user.uid,
     email: user.email,
