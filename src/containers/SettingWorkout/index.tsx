@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { Typography, Divider, Spin } from "antd";
-import { getProgramWorkout } from "services/firebase";
+// import { getProgramWorkout } from "services/firebase";
 import { PrimaryButton } from "components/Button";
 import { ListProgram } from "./components/ListProgram";
 import { AddProgram } from "./components/AddProgram";
@@ -24,11 +24,11 @@ export const SettingWorkout = () => {
   const [mode, setMode] = useState(modePage.list);
 
   useEffect(() => {
-    getProgramWorkout(setProgram);
+    // getProgramWorkout(setProgram);
   }, [mode]);
 
   useEffect(() => {
-    getProgramWorkout(setProgram);
+    // getProgramWorkout(setProgram);
   }, []);
 
   const handleMode = (mode) => {

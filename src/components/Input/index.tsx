@@ -7,7 +7,7 @@ export const InputText = styled(Input)`
   && {
     border-radius: 0;
     border: none;
-    background: #8cb90b;
+    background: #ff6700;
     font-size: 0.8rem;
   }
 `;
@@ -16,10 +16,10 @@ export const InputPassword = styled(Input.Password)`
   && {
     border-radius: 5px;
     border: none;
-    background: #8cb90b;
+    background: #ff6700;
     font-size: 0.8rem;
   }
   & .ant-input {
-    background: #8cb90b;
+    background: #ff6700;
   }
 `;

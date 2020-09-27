@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Layout, Menu, Typography } from "antd";
 import { FireOutlined, SettingOutlined } from "@ant-design/icons";
+import firebase from "utils/firebase";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -21,13 +22,13 @@ const Wrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  background: #8cb90b;
+  background: #ff6700;
   padding: 1rem;
 
   & h4.ant-typography,
   .ant-typography h4 {
     margin: 0;
-    color: black;
+    color: #ffffff;
   }
 `;
 
@@ -40,26 +41,26 @@ const SiderStyled = styled(Sider)`
   & .ant-layout-sider-zero-width-trigger,
   & .ant-menu.ant-menu-dark,
   .ant-menu.ant-menu-dark .ant-menu-sub {
-    background: #8cb909;
-    color: black;
-    top: 0px;
+    background: #ff6700;
+    color: #ffffff;
+    top: 24px;
   }
 
   & .ant-menu-dark .ant-menu-item-selected,
   & .anticon svg,
   & .ant-menu-item .anticon + span,
   .ant-menu-submenu-title .anticon + span {
-    color: black;
+    color: #ffffff;
     & span,
     svg {
-      color: #8cb909;
+      color: #ff6700;
     }
   }
 
   & .ant-menu.ant-menu-dark .ant-menu-item-selected,
   .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
     background-color: black;
-    color: #8cb909;
+    color: #ff6700;
   }
 `;
 
@@ -70,14 +71,13 @@ const Header = () => {
   const handleRoute = (page) => {
     switch (page) {
       case "home":
-        history.push("/");
-        break;
+        return history.push("/");
       case "workout":
-        history.push("/workout");
-        break;
+        return history.push("/workout");
       case "setting-workout":
-        history.push("/setting-workout");
-        break;
+        return history.push("/setting-workout");
+      case "sign-out":
+        return firebase.auth().signOut();
       default:
         break;
     }
@@ -88,7 +88,7 @@ const Header = () => {
   return (
     <Wrapper>
       <div onClick={() => handleRoute("home")}>
-        <HeaderStyled level={4}>COVID WORKOUT</HeaderStyled>
+        <HeaderStyled level={4}>FIT FOR FRIENDS</HeaderStyled>
       </div>
       <SiderStyled
         breakpoint="lg"
@@ -110,6 +110,10 @@ const Header = () => {
           <Menu.Item key="2" onClick={() => handleRoute("setting-workout")}>
             <SettingOutlined />
             <span className="nav-text">ตั้งค่าโปรแกรมของคุณ</span>
+          </Menu.Item>
+          <Menu.Item key="3" onClick={() => handleRoute("sign-out")}>
+            <SettingOutlined />
+            <span className="nav-text">ออกจากระบบ</span>
           </Menu.Item>
         </Menu>
       </SiderStyled>

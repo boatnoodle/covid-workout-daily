@@ -4,8 +4,7 @@ import firebase from "firebase";
 import { Formik } from "formik";
 import { Main } from "./components/Main";
 import { Detail } from "./components/Detail";
-import { getExercise } from "services/firebase";
-import { useFirebase } from "components/Firebase/useFirebase";
+// import { getExercise } from "services/firebase";
 import { message } from "antd";
 
 const actionConst = {
@@ -14,7 +13,7 @@ const actionConst = {
 };
 
 export const AddProgram = ({ setMode, modePage }) => {
-  const firebaseAuth = useFirebase();
+  // const firebaseAuth = useFirebase();
   const [action, setAction] = useState(actionConst.main);
   const [exercise, setExsercise] = useState(null);
   const initialState = {
@@ -47,20 +46,20 @@ export const AddProgram = ({ setMode, modePage }) => {
       created: firebase.firestore.FieldValue.serverTimestamp(),
     };
 
-    firebaseAuth.db
-      .collection("programWorkout")
-      .add(payload)
-      .then(function () {
-        message.success("บันทึกโปรแกรมสำเร็จ");
-        setMode(modePage.list);
-      })
-      .catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
+    // firebaseAuth.db
+    //   .collection("programWorkout")
+    //   .add(payload)
+    //   .then(function () {
+    //     message.success("บันทึกโปรแกรมสำเร็จ");
+    //     setMode(modePage.list);
+    //   })
+    //   .catch(function (error) {
+    //     console.error("Error writing document: ", error);
+    //   });
   };
 
   useEffect(() => {
-    getExercise(setExsercise);
+    // getExercise(setExsercise);
   }, []);
 
   return (

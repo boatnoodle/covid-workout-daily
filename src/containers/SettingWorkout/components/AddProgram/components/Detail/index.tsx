@@ -27,23 +27,23 @@ const WrapperButton = styled.div`
 
 const StepsStyled = styled(Steps)`
   & .ant-steps-item-process .ant-steps-item-icon {
-    background: #8cb90b;
-    border-color: #8cb90b;
+    background: #ff6700;
+    border-color: #ff6700;
     & span {
       color: black;
     }
   }
   & .ant-steps-item-wait .ant-steps-item-icon {
     background: black;
-    border-color: #8cb90b;
+    border-color: #ff6700;
   }
 
   & .ant-steps-item-icon > .ant-steps-icon {
-    color: #8cb90b;
+    color: #ff6700;
   }
   &&& .ant-steps-item-title {
     font-size: 0.8rem;
-    color: #8cb90b;
+    color: #ff6700;
   }
   & .ant-steps-item-finish .ant-steps-item-icon {
     background-color: #4b6501;
