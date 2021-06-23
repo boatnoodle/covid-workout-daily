@@ -7,7 +7,6 @@ import { PrimaryButton } from "components/Button";
 import { RightOutlined } from "@ant-design/icons";
 import { SelectExercise } from "./SelectExercise";
 import { AmountExercise } from "./AmountExercise";
-import { TimeExercise } from "./TimeExercise";
 import { DayExercise } from "./SelectDay";
 
 const { Step } = Steps;

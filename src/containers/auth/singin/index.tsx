@@ -1,7 +1,7 @@
 import React from "react";
 import firebase from "utils/firebase";
 
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { StyledFirebaseAuth } from "react-firebaseui";
 import { Col, Row } from "antd";
 
 const uiConfig = {
