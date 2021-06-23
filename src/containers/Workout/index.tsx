@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { Spin, Typography } from "antd";
-import { getProgramWorkout } from "services/firebase";
+// import { getProgramWorkout } from "services/firebase";
 import { SelectProgram } from "./components/SelectProgram";
 import { WorkoutProgram } from "./components/WorkoutProgram";
 
@@ -47,7 +47,7 @@ export const Workout = () => {
   }, [program]);
 
   useEffect(() => {
-    getProgramWorkout(setProgramWorkout);
+    // getProgramWorkout(setProgramWorkout);
   }, []);
 
   return <DisplayWithAction />;

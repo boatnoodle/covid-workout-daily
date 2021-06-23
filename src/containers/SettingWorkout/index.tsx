@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { Typography, Divider, Spin } from "antd";
-import { getProgramWorkout } from "services/firebase";
+import { Typography, Divider, Row, Col } from "antd";
+import { getPrograms } from "services/firebase";
 import { PrimaryButton } from "components/Button";
 import { ListProgram } from "./components/ListProgram";
 import { AddProgram } from "./components/AddProgram";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
@@ -14,6 +15,14 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr;
   row-gap: 10px;
 `;
+
+const WrapperNoData = styled.div`
+  &,
+  .ant-typography {
+    color: #bfbfbf;
+  }
+`;
+
 const modePage = {
   list: "list",
   add: "add",
@@ -24,11 +33,11 @@ export const SettingWorkout = () => {
   const [mode, setMode] = useState(modePage.list);
 
   useEffect(() => {
-    getProgramWorkout(setProgram);
+    getPrograms(setProgram);
   }, [mode]);
 
   useEffect(() => {
-    getProgramWorkout(setProgram);
+    getPrograms(setProgram);
   }, []);
 
   const handleMode = (mode) => {
@@ -43,6 +52,7 @@ export const SettingWorkout = () => {
         break;
     }
   };
+  console.log(programs, "programs");
 
   if (!mode && !programs) {
     return (
@@ -62,8 +72,25 @@ export const SettingWorkout = () => {
         สร้างโปรแกรมออกกำลังกาย
       </PrimaryButton>
       <Divider />
-      <Title level={3}>โปรแกรมของคุณ</Title>
-      {programs ? <ListProgram datas={programs} /> : <Spin size="large" />}
+      {programs ? (
+        <>
+          <Title level={3}>โปรแกรมของคุณ</Title>
+          <ListProgram datas={programs} />
+        </>
+      ) : (
+        <WrapperNoData>
+          <Row justify="center">
+            <Col>
+              <ExclamationCircleOutlined />
+            </Col>
+          </Row>
+          <Row justify="center">
+            <Col>
+              <Title level={4}>ยังไม่มีโปรแกรม</Title>
+            </Col>
+          </Row>
+        </WrapperNoData>
+      )}
     </Wrapper>
   );
 };

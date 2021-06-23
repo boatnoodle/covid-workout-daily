@@ -7,9 +7,9 @@ export const PrimaryButton = styled(Button)`
   &,
   .ant-btn:hover,
   .ant-btn:focus {
-    background: #8cb909;
-    border-color: #8cb909;
-    color: black;
+    background: #ff6700;
+    border-color: #ff6700;
+    color: #ffffff;
     padding: 0 1rem;
     height: 40px;
     border-radius: 5px;
@@ -17,8 +17,8 @@ export const PrimaryButton = styled(Button)`
   }
 
   .ant-btn:not([disabled]):hover {
-    background: #8cb909;
-    border-color: #8cb909;
+    background: #ff6700;
+    border-color: #ff6700;
     color: black;
   }
 `;

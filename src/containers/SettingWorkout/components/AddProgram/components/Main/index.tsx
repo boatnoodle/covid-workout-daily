@@ -6,6 +6,7 @@ import { PrimaryButton } from "components/Button";
 import { Form } from "./Form";
 import { ListProgramDetail } from "./ListProgramDetail";
 import { SaveOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 interface ProgramDetail {
   name: string;
@@ -16,6 +17,17 @@ interface ProgramDetail {
     restTime: number | null;
   };
 }
+
+const SaveProgramButton = styled(PrimaryButton)`
+  && {
+    margin-bottom: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
+`;
 
 export const Main = ({ setAction, action, handleSubmit }) => {
   const { values } = useFormikContext<any>();
@@ -33,16 +45,15 @@ export const Main = ({ setAction, action, handleSubmit }) => {
       >
         เพิ่มท่าออกกำลังกาย
       </PrimaryButton>
-      <PrimaryButton
+
+      <ListProgramDetail programDetail={values.programDetail} />
+      <SaveProgramButton
         disabled={!values.programName || values.programDetail.length === 0}
-        style={{ marginBottom: "20px" }}
         onClick={handleSubmit}
         icon={<SaveOutlined />}
       >
         บันทึกโปรแกรม
-      </PrimaryButton>
-
-      <ListProgramDetail programDetail={values.programDetail} />
+      </SaveProgramButton>
     </>
   );
 };

@@ -8,11 +8,11 @@ const { Panel } = Collapse;
 
 const PanelStyled = styled(Panel)`
   & .ant-collapse-header {
-    background: #8cb909;
+    background: #ff6700;
   }
   & .ant-collapse-content-box {
     background: black;
-    color: #8cb909;
+    color: #ff6700;
     font-size: 0.8rem;
     border: 1px solid;
   }

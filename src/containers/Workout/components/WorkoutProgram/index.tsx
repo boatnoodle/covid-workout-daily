@@ -19,7 +19,7 @@ const ProgressStyled = styled(Progress)`
   grid-area: progress;
   text-align: center;
   & .ant-progress-text {
-    color: #8cb909;
+    color: #ff6700;
     font-size: 4rem;
   }
 `;

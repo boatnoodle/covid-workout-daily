@@ -8,6 +8,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { SelectExercise } from "./SelectExercise";
 import { AmountExercise } from "./AmountExercise";
 import { TimeExercise } from "./TimeExercise";
+import { DayExercise } from "./SelectDay";
 
 const { Step } = Steps;
 const { Title } = Typography;
@@ -15,9 +16,9 @@ const { Title } = Typography;
 const WrapperSticky = styled.div`
   position: sticky;
   top: 73px;
-  z-index: 999;
+  z-index: 5;
   padding: 0.5rem 0;
-  background: black;
+  background: #ffffff;
 `;
 
 const WrapperButton = styled.div`
@@ -27,34 +28,39 @@ const WrapperButton = styled.div`
 
 const StepsStyled = styled(Steps)`
   & .ant-steps-item-process .ant-steps-item-icon {
-    background: #8cb90b;
-    border-color: #8cb90b;
+    background: #ff6700;
+    border-color: #ff6700;
     & span {
-      color: black;
+      color: #ffffff;
     }
   }
   & .ant-steps-item-wait .ant-steps-item-icon {
-    background: black;
-    border-color: #8cb90b;
+    background: #ffffff;
+    border-color: #ff6700;
+  }
+
+  & .ant-steps-finish-icon {
+    color: #ffffff;
   }
 
   & .ant-steps-item-icon > .ant-steps-icon {
-    color: #8cb90b;
+    color: #ff6700;
   }
   &&& .ant-steps-item-title {
     font-size: 0.8rem;
-    color: #8cb90b;
+    color: #ff6700;
   }
   & .ant-steps-item-finish .ant-steps-item-icon {
-    background-color: #4b6501;
-    border-color: #4b6501;
+    background-color: #ff6700;
+    border-color: #ff6700;
+    color: #ffffff;
   }
 
   &
     .ant-steps-item-finish
     > .ant-steps-item-container
     > .ant-steps-item-tail::after {
-    background-color: #4b6501;
+    background-color: #ff6700;
   }
 `;
 
@@ -63,6 +69,7 @@ export const Detail = ({ datas, setAction, action }) => {
   const [step, setStep] = useState(0);
   const [detail, setDetail] = useState({
     name: null,
+    day: null,
     amount: null,
     enableTime: false,
     timeObj: null,
@@ -70,6 +77,10 @@ export const Detail = ({ datas, setAction, action }) => {
 
   const handleChange = (current) => {
     setStep(current);
+  };
+
+  const handleDayExercise = (value) => {
+    setDetail({ ...detail, day: value });
   };
 
   const handleSelectExercise = (value) => {
@@ -91,11 +102,13 @@ export const Detail = ({ datas, setAction, action }) => {
   const stepDisplayHeader = () => {
     switch (step) {
       case 0:
-        return <Title level={4}>เลือกท่าออกกำลังกาย</Title>;
+        return <Title level={4}>เลือกวันที่ต้องการออกกำลังกาย</Title>;
       case 1:
-        return <Title level={4}>วางแผนจำนวนเซ็ต</Title>;
+        return <Title level={4}>เลือกท่าออกกำลังกาย</Title>;
       case 2:
-        return <Title level={4}>วางแผนเวลา</Title>;
+        return <Title level={4}>วางแผนจำนวนเซ็ต</Title>;
+      // case 3:
+      //   return <Title level={4}>วางแผนเวลา</Title>;
       default:
         break;
     }
@@ -104,6 +117,8 @@ export const Detail = ({ datas, setAction, action }) => {
   const stepDisplayContent = () => {
     switch (step) {
       case 0:
+        return <DayExercise handleDayExercise={handleDayExercise} />;
+      case 1:
         return datas ? (
           <SelectExercise
             datas={datas}
@@ -112,10 +127,10 @@ export const Detail = ({ datas, setAction, action }) => {
         ) : (
           <div>Loading...</div>
         );
-      case 1:
-        return <AmountExercise handleAmountExercise={handleAmountExercise} />;
       case 2:
-        return <TimeExercise handleTimeExercise={handleTimeExercise} />;
+        return <AmountExercise handleAmountExercise={handleAmountExercise} />;
+      // case 3:
+      //   return <TimeExercise handleTimeExercise={handleTimeExercise} />;
       default:
         break;
     }
@@ -157,9 +172,10 @@ export const Detail = ({ datas, setAction, action }) => {
           current={step}
           onChange={handleChange}
         >
+          <Step title="เลือกวันที่ออกกำลังกาย" />
           <Step title="เลือกท่าออกกำลังกาย" />
           <Step title="วางแผนจำนวนเซ็ต" />
-          <Step title="วางแผนเวลา" />
+          {/* <Step title="วางแผนเวลา" /> */}
         </StepsStyled>
         <WrapperButton>{nextStepButton()}</WrapperButton>
         <Divider />

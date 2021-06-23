@@ -22,7 +22,7 @@ const SwitchStyled = styled(Switch)`
   }
 
   &&.ant-switch-checked {
-    background-color: #8cb90b !important;
+    background-color: #ff6700 !important;
   }
 `;
 

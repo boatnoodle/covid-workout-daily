@@ -1,12 +1,12 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCVok1WjURgIhn6w4fU_k8b-R_oUWmtrnk",
-  authDomain: "covid-workout-daily.firebaseapp.com",
-  databaseURL: "https://covid-workout-daily.firebaseio.com",
-  projectId: "covid-workout-daily",
-  storageBucket: "covid-workout-daily.appspot.com",
-  messagingSenderId: "908284946121",
-  appId: "1:908284946121:web:feaf35e396979f58f74f18",
-  measurementId: "G-0ED8VNCT1Y",
+  apiKey: "AIzaSyBzRz-b86qY8z8l0pqdbbk7RCw5P2XH9dY",
+  authDomain: "fit-for-friends.firebaseapp.com",
+  databaseURL: "https://fit-for-friends.firebaseio.com",
+  projectId: "fit-for-friends",
+  storageBucket: "fit-for-friends.appspot.com",
+  messagingSenderId: "439946428942",
+  appId: "1:439946428942:web:26f977b0de5233cdb9f25f",
+  measurementId: "G-HSS6948NL7",
 };
 
 module.exports = firebaseConfig;

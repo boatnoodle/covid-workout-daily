@@ -38,7 +38,7 @@ export const SelectExercise = ({ datas, handleSelectExercise }) => {
       renderItem={(item: Item) => {
         return (
           <List.Item
-            style={{ background: exercise === item.name ? "#8cb90b" : "" }}
+            style={{ background: exercise === item.name ? "#FF6700" : "" }}
             onClick={() => handleClick(item.name)}
           >
             <List.Item.Meta title={item.name} />
